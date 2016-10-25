@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyMVPDemo</string>
+    <string name="btn_refresh">刷新获取数据</string>
+</resources>
