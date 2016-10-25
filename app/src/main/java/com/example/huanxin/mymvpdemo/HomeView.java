@@ -1,12 +1,14 @@
 package com.example.huanxin.mymvpdemo;
 
+import com.example.huanxin.mymvpdemo.basemvp.MvpView;
+
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/10/24 0024.
  */
 
-public interface HomeView {
+public interface HomeView extends MvpView{
     /**
      * 当开始加载数据后，显示的视图工作
      */
