@@ -34,17 +34,18 @@ public class MainActivity extends AppCompatActivity implements HomeView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mHomePresenter = new HomePresenter();
+        mHomePresenter.atteachView(this);
+        mHomePresenter.onCreat();
     }
 
     @Override
     public void onContentChanged() {
         super.onContentChanged();
         unbinder = ButterKnife.bind(this);
-
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         listView.setAdapter(arrayAdapter);
-        mHomePresenter = new HomePresenter();
-        mHomePresenter.atteachView(this);
+
     }
 
     @OnClick(R.id.btn_refresh)
@@ -88,5 +89,6 @@ public class MainActivity extends AppCompatActivity implements HomeView {
         super.onDestroy();
         unbinder.unbind();
         mHomePresenter.detachView();
+        mHomePresenter.onDestory();
     }
 }

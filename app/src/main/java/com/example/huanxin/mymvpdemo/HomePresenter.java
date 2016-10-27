@@ -2,31 +2,32 @@ package com.example.huanxin.mymvpdemo;
 
 import com.example.huanxin.mymvpdemo.basemvp.MvpPresenter;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/10/24 0024.
  */
 
-public class HomePresenter extends MvpPresenter<HomeView> implements HomeModel.Model {
+public class HomePresenter extends MvpPresenter<HomeView> {
 
 
     public void loadData() {
         getView().showLoading();
-        new HomeModel(this).asyncLoadDatas();
+        new HomeModel().asyncLoadDatas();
     }
 
-
-    @Override
-    public void setData(List<String> datas) {
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(HomeEvent homeEvent) {
         getView().hideLoading();
-        if (datas == null) {
+        if (homeEvent.datas == null) {
             getView().showErrorMsg("未知错误！");
             return;
         }
-        getView().refreshListView(datas);
+        getView().refreshListView(homeEvent.datas);
     }
-
 
     public HomeView getNullObject() {
         HomeView homeView = new HomeView() {

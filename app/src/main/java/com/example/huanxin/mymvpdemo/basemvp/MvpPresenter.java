@@ -1,5 +1,7 @@
 package com.example.huanxin.mymvpdemo.basemvp;
 
+import org.greenrobot.eventbus.EventBus;
+
 /**
  * Created by Administrator on 2016/10/25 0025.
  */
@@ -9,6 +11,15 @@ public abstract class MvpPresenter<V extends MvpView> {
 
     protected final V getView(){
         return mView;
+    }
+
+
+    public void  onCreat(){
+        EventBus.getDefault().register(this);
+    }
+
+    public void onDestory(){
+        EventBus.getDefault().unregister(this);
     }
 
 
